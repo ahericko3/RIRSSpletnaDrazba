@@ -30,5 +30,42 @@ public class Uporabnik implements Serializable {
 	public int getId() {
 		return this.id;
 	}
+
+	public String getIme() {
+		return ime;
+	}
+
+	public void setIme(String ime) {
+		this.ime = ime;
+	}
+
+	public String getPriimek() {
+		return priimek;
+	}
+
+	public void setPriimek(String priimek) {
+		this.priimek = priimek;
+	}
+
+	public String getGeslo() {
+		return geslo;
+	}
+
+	public void setGeslo(String geslo) {
+		this.geslo = geslo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
    
+	
 }
