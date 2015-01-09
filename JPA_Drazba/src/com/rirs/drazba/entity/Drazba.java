@@ -2,7 +2,9 @@ package com.rirs.drazba.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -26,11 +28,22 @@ public class Drazba implements Serializable {
 	private String opisPredmeta;
 	private Date koneDrazbe;
 	private String porekloDrzava;
+	//@Enumerated(EnumType.STRING)
 	private StanjePredmeta stanje;
-	private List<PlacilnaSredstva> placilnaSredstva;
+	//@Enumerated
+	//@ElementCollection(targetClass = PlacilnaSredstva.class)
+	//@Enumerated(EnumType.STRING)
+	@ElementCollection(targetClass=PlacilnaSredstva.class)
+    @Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
+    @CollectionTable(name="drazba_placilnaSredstva")
+    @Column(name="placilnoSredstvo") // Column name in person_interest
+	private Collection<PlacilnaSredstva> placilnaSredstva;
+	@OneToMany(mappedBy = "drazba", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Ponudba> ponudbe;
+	@OneToMany(targetEntity=Fotografija.class,mappedBy = "drazba", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Fotografija> fotografije;
 	private Uporabnik izdajatelj;
+	
 	
 	
 	public Drazba() {
@@ -84,15 +97,16 @@ public class Drazba implements Serializable {
 	public void setStanje(StanjePredmeta stanje) {
 		this.stanje = stanje;
 	}
-
-	public List<PlacilnaSredstva> getPlacilnaSredstva() {
+	
+	
+	public Collection<PlacilnaSredstva> getPlacilnaSredstva() {
 		return placilnaSredstva;
 	}
 
-	public void setPlacilnaSredstva(List<PlacilnaSredstva> placilnaSredstva) {
+	public void setPlacilnaSredstva(Collection<PlacilnaSredstva> placilnaSredstva) {
 		this.placilnaSredstva = placilnaSredstva;
 	}
-
+	
 	public List<Ponudba> getPonudbe() {
 		return ponudbe;
 	}
@@ -101,6 +115,7 @@ public class Drazba implements Serializable {
 		this.ponudbe = ponudbe;
 	}
 
+	
 	public List<Fotografija> getFotografije() {
 		return fotografije;
 	}
@@ -108,7 +123,9 @@ public class Drazba implements Serializable {
 	public void setFotografije(List<Fotografija> fotografije) {
 		this.fotografije = fotografije;
 	}
-
+	
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="uporabnik_id")
 	public Uporabnik getIzdajatelj() {
 		return izdajatelj;
 	}

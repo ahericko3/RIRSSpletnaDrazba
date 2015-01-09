@@ -10,7 +10,6 @@ import javax.persistence.*;
  *
  */
 @Entity
-
 public class Fotografija implements Serializable {
 
 	
@@ -50,6 +49,8 @@ public class Fotografija implements Serializable {
 		this.opis = opis;
 	}
 
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="drazba_id")
 	public Drazba getDrazba() {
 		return drazba;
 	}

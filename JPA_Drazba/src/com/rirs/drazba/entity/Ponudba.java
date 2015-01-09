@@ -50,6 +50,8 @@ public class Ponudba implements Serializable {
 		this.datum = datum;
 	}
 
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="drazba_id")
 	public Drazba getDrazba() {
 		return drazba;
 	}
@@ -57,7 +59,9 @@ public class Ponudba implements Serializable {
 	public void setDrazba(Drazba drazba) {
 		this.drazba = drazba;
 	}
-
+	
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="uporabnik_id")
 	public Uporabnik getUporabnik() {
 		return uporabnik;
 	}
