@@ -3,6 +3,9 @@
 		<persistence-unit name="drazba_DB">
 	<jta-data-source>java:jboss/datasources/drazba_DB</jta-data-source>
 	<class>com.rirs.drazba.entity.Uporabnik</class>
+	<class>com.rirs.drazba.entity.Drazba</class>
+	<class>com.rirs.drazba.entity.Fotografija</class>
+	<class>com.rirs.drazba.entity.Ponudba</class>
 	
 	    <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
