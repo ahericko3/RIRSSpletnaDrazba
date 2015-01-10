@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.rirs.drazba.entity.Drazba;
 import com.rirs.drazba.entity.Uporabnik;
@@ -55,8 +56,26 @@ public class UporabnikDAOBean implements IUporabnikDAO{
 
 	@Override
 	public Uporabnik preveriUporabnika(String email, String geslo) {
-		// TODO Auto-generated method stub
-		return null;
+		/*TypedQuery<Uporabnik> query = em.createQuery("SELECT u FROM Uporabnik u WHERE u.email = '" + email + "' AND u.geslo = '"+geslo+  "'", Uporabnik.class);
+		try{	
+			return query.getSingleResult();
+		if(query.getSingleResult()!=null){
+			System.out.println("T");
+			return query.getSingleResult();
+			}
+		} catch(Exception e){
+			System.out.println("F");
+			return null;
+        }*/
+
+		//System.out.println("F");
+		//return null;
+		List<Uporabnik> leti = em.createQuery("select l from Uporabnik l where l.geslo=:ges AND l.email=:em",Uporabnik.class)
+				.setParameter("ges", geslo)
+				.setParameter("em", email)
+				.getResultList();
+				
+				return leti.get(0);
 	}
 
 }
