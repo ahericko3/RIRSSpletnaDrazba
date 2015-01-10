@@ -21,13 +21,18 @@
 						<div class="login-form">
 							<!--login form-->
 							<h2>Prijava :</h2>
-							<h:form action="#">
-								<p:inputText type="email" placeholder="elektronska posta" />
-								<p:inputText type="password" placeholder="geslo" />
-								<span> <p:inputText type="checkbox" class="checkbox" />
-									Keep me signed in
-								</span>
-								<p:commandButton value="Prijava"
+							<h:form >
+							<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+ 								<h:panelGrid id="grid" columns="2" cellpadding="5">
+									<p:outputLabel for="em" value="Email:" />
+									<p:inputText id="em" required="true" type="text" placeholder="email" value="#{prijavaMB.email}" />
+									<p:message for="em" /><br/>
+									<p:outputLabel for="ge" value="Geslo:" />
+							
+								<p:inputText id="ge" required="true" type="password" placeholder="geslo" value="#{prijavaMB.geslo}"/>
+								<p:message for="ge" /><br/>
+								</h:panelGrid>
+								<p:commandButton value="Prijava" action="#{prijavaMB.prijaviUporabnika()}"
 									styleClass="ui-priority-primary" />
 
 							</h:form>

@@ -1,6 +1,8 @@
 package com.rirs.drazba.web.mannagedbeans;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import com.rirs.drazba.ejb.dao.IUporabnikDAO;
 import com.rirs.drazba.entity.Uporabnik;
@@ -50,14 +52,24 @@ public class PrijavaMannagedBean {
 		this.jePrijavlen = jePrijavlen;
 	}
 	
-	public void prijaviUporabnika() {
+	public String prijaviUporabnika() {
 		System.out.println("Prijavljam");
 		try{
 		this.uporabnik=uporabnikDAO.preveriUporabnika(email, geslo);
+	    //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "."));
+		if(uporabnik!=null){ 
+			jePrijavlen=true;
+			return "index.xhtml?faces-redirect=true";
+		}else {
+			jePrijavlen=false;
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Napaka pri prijavi"));	
+					
+		}
 		
 		}catch(Exception e){
-			
+		      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Napaka pri prijavi"));	
 		}
+		 return "prijava.xhtml?faces-redirect=true";
 	}
 
 }

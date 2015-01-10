@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
-      <h:head>
-    <h:title>Letalski prevoznik Letalec1</h:title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:title></h:title>
 
-    </h:head>
-    <body>
-	    <ui:composition>
- <div class="header_top"><!--header_top-->
+</h:head>
+<body>
+	<ui:composition>
+		<div class="header_top">
+			<!--header_top-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@herkos.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88
+										821</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i>
+										info@herkos.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -34,72 +39,93 @@
 					</div>
 				</div>
 			</div>
-		</div><!--/header_top-->
-		
-		<div class="header-middle"><!--header-middle-->
+		</div>
+		<!--/header_top-->
+
+		<div class="header-middle">
+			<!--header-middle-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html">Drazba HerKos<img src="images/home/" alt="" /></a>
+							<a href="index.html">Drazba HerKos<img src="images/home/"
+								alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
-							<div class="btn-group"></div>			
-							<div class="btn-group">	</div>
+							<div class="btn-group"></div>
+							<div class="btn-group"></div>
 						</div>
 					</div>
 					<div class="col-sm-8">
+					<h:panelGrid rendered="#{prijavaMB.jePrijavlen==true}" >
+				<h3><h:outputText value="Dobrodošel/a, #{prijavaMB.uporabnik.ime}  #{prijavaMB.uporabnik.priimek}"  /></h3>	
+					</h:panelGrid>
+					<p:menubar rendered="#{prijavaMB.jePrijavlen==true}">
+								<p:menuitem icon="ui-icon-document" value="Moje  Drazbe"
+										url="mojeDrazbe.xhtml" />
+									<f:facet name="options">
+										<p:commandButton action="#{prijava.odjava()}" value="Odjava"
+											icon="ui-icon-power" />
+									</f:facet>
+								</p:menubar>
 						<div class="shop-menu pull-right">
+						
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Racun</a></li>
-								<li><a href="checkout.html"><i class="fa fa-star"></i> Odprte drazbe</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Koncane drazbe</a></li>
-								<li><a href="prijava.xhtml"><i class="fa fa-lock"></i> Prijava</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Registracija</a></li>
+								<li><a href="checkout.html"><i class="fa fa-star"></i>
+										Odprte drazbe</a></li>
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i>
+										Koncane drazbe</a></li>
+								<li><a href="prijava.xhtml"><i class="fa fa-lock"></i>
+										Prijava</a></li>
+									<li><a href="login.html"><i class="fa fa-lock"></i>
+											Registracija</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
+		</div>
+		<!--/header-middle-->
+
+		<div class="header-bottom">
+			<!--header-bottom-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-9">
 						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="index.html" class="active">Domov</a></li>
-								<li class="dropdown"><a href="#">Drazbe<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
-                                    </ul>
-                                </li> 
-								
+								<li class="dropdown"><a href="#">Drazbe<i
+										class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="shop.html">Products</a></li>
+										<li><a href="product-details.html">Product Details</a></li>
+										<li><a href="checkout.html">Checkout</a></li>
+										<li><a href="cart.html">Cart</a></li>
+										<li><a href="login.html">Login</a></li>
+									</ul></li>
+
 								<li><a href="contact-us.html">Kontakt</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Iskanje"/>
+							<input type="text" placeholder="Iskanje" />
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	    </ui:composition>
-    </body>
+	</ui:composition>
+</body>
 </html>
