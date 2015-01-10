@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<h:title>Drazba HerKos - Prijava</h:title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/templateNew.xhtml">
+		<ui:define name="content">
+			<section id="form"><!--form-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-1">
+						<div class="login-form">
+							<!--login form-->
+							<h2>Dodaj drazbo :</h2>
+							<h:form >
+							<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+ 								<h:panelGrid id="grid" columns="2" cellpadding="5">
+									<p:outputLabel for="em" value="Email:" />
+									<p:inputText id="em" required="true" type="text" placeholder="email" value="#{prijavaMB.email}" />
+									<p:message for="em" /><br/>
+									<p:outputLabel for="ge" value="Geslo:" />
+							
+								<p:inputText id="ge" required="true" type="password" placeholder="geslo" value="#{prijavaMB.geslo}"/>
+								<p:message for="ge" /><br/>
+								
+								
+								
+								Fucking primer za StanjeIzdelka z enumi naredo sem pa za Placila ki pa si List...
+								
+								
+								<h:selectOneMenu id="" value="#{person.gender}">
+  <f:selectItems value="#{myManagedBean.genderValues}" var="g" 
+    itemValue="#{g}" itemLabel="#{g.label}"/>
+</h:selectOneMenu>
+								
+								
+								
+								</h:panelGrid>
+								<p:commandButton value="Prijava" action="#{prijavaMB.prijaviUporabnika()}"
+									styleClass="ui-priority-primary" />
+
+							</h:form>
+						</div>
+						<!--/login form-->
+					</div>
+					
+					
+						
+					
+				</div>
+			</div>
+			</section>
+			<f:view>
+		
+		Prijava:
+		</f:view>
+		</ui:define>
+
+
+
+	</ui:composition>
+
+
+</h:body>
+
+</html>

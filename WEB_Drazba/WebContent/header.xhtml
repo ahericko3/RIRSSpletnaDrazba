@@ -61,8 +61,10 @@
 				<h3><h:outputText value="Dobrodošel/a, #{prijavaMB.uporabnik.ime}  #{prijavaMB.uporabnik.priimek}"  /></h3>	
 					</h:panelGrid>
 					<p:menubar rendered="#{prijavaMB.jePrijavlen==true}">
-								<p:menuitem icon="ui-icon-document" value="Moje  Drazbe"
+								<p:menuitem icon="ui-icon-document" value="Moje  drazbe"
 										url="mojeDrazbe.xhtml" />
+								<p:menuitem icon="ui-icon-document" value="Dodaj drazbo"
+										url="dodajDrazbo.xhtml" />
 									<f:facet name="options">
 										<p:commandButton action="#{prijava.odjava()}" value="Odjava"
 											icon="ui-icon-power" />

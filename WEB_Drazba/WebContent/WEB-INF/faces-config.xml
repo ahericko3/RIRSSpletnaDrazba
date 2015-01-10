@@ -51,5 +51,40 @@
    <value/>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>dodajDrazboMannagedBean</managed-bean-name>
+  <managed-bean-class>com.rirs.drazba.web.mannagedbeans.DodajDrazboMannagedBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>imePredmeta</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>izdajatelj</property-name>
+   <property-class>com.rirs.drazba.entity.Uporabnik</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>konecDrazbe</property-name>
+   <property-class>java.sql.Date</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>porekloDrzava</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>stanje</property-name>
+   <property-class>com.rirs.drazba.enumi.StanjePredmeta</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>placilnaSredstva</property-name>
+   <property-class>com.rirs.drazba.enumi.PlacilnaSredstva</property-class>
+   <list-entries/>
+  </managed-property>
+ </managed-bean>
  <application/>
 </faces-config>
