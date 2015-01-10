@@ -1,7 +1,7 @@
 package com.rirs.drazba.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +26,8 @@ public class Drazba implements Serializable {
 	private int id;
 	private String imePredmeta;
 	private String opisPredmeta;
+	private Double sklicnaCena;
+	private Double cenaPakiranja;
 	private Date koneDrazbe;
 	private String porekloDrzava;
 	//@Enumerated(EnumType.STRING)
@@ -46,6 +48,22 @@ public class Drazba implements Serializable {
 	
 	
 	
+	public Double getSklicnaCena() {
+		return sklicnaCena;
+	}
+
+	public void setSklicnaCena(Double sklicnaCena) {
+		this.sklicnaCena = sklicnaCena;
+	}
+
+	public Double getCenaPakiranja() {
+		return cenaPakiranja;
+	}
+
+	public void setCenaPakiranja(Double cenaPakiranja) {
+		this.cenaPakiranja = cenaPakiranja;
+	}
+
 	public Drazba() {
 		super();
 	}

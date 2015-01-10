@@ -6,10 +6,12 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.rirs.drazba.entity.Drazba;
 import com.rirs.drazba.entity.Ponudba;
 import com.rirs.drazba.entity.Uporabnik;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Stateless
 public class DrazbaDAOBean implements IDrazbaDAO {
@@ -29,11 +31,9 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 		try
 		{
 			em.persist(drazba);
-			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-			
 		}	
 		
 	}
@@ -113,4 +113,25 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 		
 	}
 
+	@Override
+	public List<Drazba> vrniAktualneDrazbe() {
+		 List<Drazba> drazbe;  
+		  try{
+		  //TypedQuery<Drazba> q=em.createQuery("Select * from Drazba where koneDrazbe > NOW() ", Drazba.class);  
+		 // drazbe = q.getResultList(); 
+		  
+		   drazbe = em.createQuery("select l from Drazba l where l.koneDrazbe>:datum",Drazba.class)
+					.setParameter("datum", new java.util.Date()).getResultList();
+					
+		  return drazbe;
+		  }catch(Exception e)
+		  {
+		   e.printStackTrace();
+		   return null;
+		  }
+		  
+		  
+	}
+	
+	
 }

@@ -1,29 +1,92 @@
 package com.rirs.drazba.web.mannagedbeans;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
+
+import com.rirs.drazba.ejb.dao.IDrazbaDAO;
+import com.rirs.drazba.entity.Drazba;
 import com.rirs.drazba.enumi.PlacilnaSredstva;
 import com.rirs.drazba.enumi.StanjePredmeta;
 
 public class DodajDrazboMannagedBean {
 
+	@EJB
+	IDrazbaDAO drazbaDAO;
+	
 	private java.lang.String imePredmeta;
 	private com.rirs.drazba.entity.Uporabnik izdajatelj;
-	private java.sql.Date konecDrazbe;
+	private java.util.Date konecDrazbe;
 	private java.lang.String porekloDrzava;
+	private String opisPredmeta;
 	private StanjePredmeta stanje;
+	private Double sklicnaCena;
+	private Double cenaPosiljanja;
 	private List<PlacilnaSredstva> placilnaSredstva;
 	
+	@ManagedProperty(value="#{prijavaMB}")
+	private PrijavaMannagedBean prijava; 
+	
+	public PrijavaMannagedBean getPrijava() {
+		return prijava;
+	}
+
+	public void setPrijava(PrijavaMannagedBean prijava) {
+		this.prijava = prijava;
+	}
+
 	private PlacilnaSredstva[] pp;
 	
 	
+	public StanjePredmeta[] getStanjePredmeta() {
+		return StanjePredmeta.values();
+	}
+	
+	
+	public Double getCenaPosiljanja() {
+		return cenaPosiljanja;
+	}
 
+	public void setCenaPosiljanja(Double cenaPosiljanja) {
+		this.cenaPosiljanja = cenaPosiljanja;
+	}
+
+	public Double getSklicnaCena() {
+		return sklicnaCena;
+	}
+
+	public void setSklicnaCena(Double sklicnaCena) {
+		this.sklicnaCena = sklicnaCena;
+	}
 
 	public PlacilnaSredstva[] getPp() {
 		return PlacilnaSredstva.values();
+	}
+
+	public String getOpisPredmeta() {
+		return opisPredmeta;
+	}
+
+	public void setOpisPredmeta(String opisPredmeta) {
+		this.opisPredmeta = opisPredmeta;
+	}
+
+	public List<PlacilnaSredstva> getPlacilnaSredstva() {
+		return placilnaSredstva;
+	}
+
+	public void setPlacilnaSredstva(List<PlacilnaSredstva> placilnaSredstva) {
+		this.placilnaSredstva = placilnaSredstva;
 	}
 
 	public void setPp(PlacilnaSredstva[] pp) {
@@ -46,11 +109,11 @@ public class DodajDrazboMannagedBean {
 		this.izdajatelj = izdajatelj;
 	}
 
-	public java.sql.Date getKonecDrazbe() {
+	public Date getKonecDrazbe() {
 		return konecDrazbe;
 	}
 
-	public void setKonecDrazbe(java.sql.Date konecDrazbe) {
+	public void setKonecDrazbe(Date konecDrazbe) {
 		this.konecDrazbe = konecDrazbe;
 	}
 
@@ -70,6 +133,32 @@ public class DodajDrazboMannagedBean {
 		this.stanje = stanje;
 	}
 
+	public void dodajDrazbo(){
+	    Drazba d=new Drazba();
+	    d.setImePredmeta(imePredmeta);
+	    d.setKoneDrazbe(konecDrazbe);
+	    d.setPlacilnaSredstva(placilnaSredstva);
+	    d.setPorekloDrzava(porekloDrzava);
+	    d.setStanje(stanje);
+	    d.setOpisPredmeta(opisPredmeta);
+	    d.setIzdajatelj(prijava.getUporabnik());
+	   
+	    drazbaDAO.dodaj(d);
+		
+	}
 	
+	public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+     
+    public void click() {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+         
+        requestContext.update("form:display");
+        requestContext.execute("PF('dlg').show()");
+    }
 
+    
 }

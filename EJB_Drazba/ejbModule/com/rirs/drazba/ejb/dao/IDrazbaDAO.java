@@ -20,6 +20,7 @@ public interface IDrazbaDAO {
 	public List<Drazba> vrniVseDrazbeIzdajatelja(Uporabnik up);
 	public List<Drazba> vrniVsePotekleDrazbe();
 	public List<Drazba> vrniNajblizjih5Drazb();
+	public List<Drazba> vrniAktualneDrazbe();
 	
 	public void oddajPonudbo(Drazba drazba,Ponudba ponudba);
 }

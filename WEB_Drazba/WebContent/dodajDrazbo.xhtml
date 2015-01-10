@@ -21,41 +21,75 @@
 						<div class="login-form">
 							<!--login form-->
 							<h2>Dodaj drazbo :</h2>
-							<h:form >
-							<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
- 								<h:panelGrid id="grid" columns="2" cellpadding="5">
-									<p:outputLabel for="em" value="Email:" />
-									<p:inputText id="em" required="true" type="text" placeholder="email" value="#{prijavaMB.email}" />
-									<p:message for="em" /><br/>
-									<p:outputLabel for="ge" value="Geslo:" />
-							
-								<p:inputText id="ge" required="true" type="password" placeholder="geslo" value="#{prijavaMB.geslo}"/>
-								<p:message for="ge" /><br/>
-								
-								
-								
-								Fucking primer za StanjeIzdelka z enumi naredo sem pa za Placila ki pa si List...
-								
-								
-								<h:selectOneMenu id="" value="#{person.gender}">
-  <f:selectItems value="#{myManagedBean.genderValues}" var="g" 
-    itemValue="#{g}" itemLabel="#{g.label}"/>
-</h:selectOneMenu>
-								
-								
-								
+							<h:form>
+								<p:growl id="msgs" showDetail="true" />
+								<p:messages id="messages" showDetail="true" autoUpdate="true"
+									closable="true" />
+								<h:panelGrid id="grid" columns="2" cellpadding="5">
+									<p:outputLabel for="ip" value="Ime predmeta:" />
+									<p:inputText id="ip" required="true" type="text"
+										placeholder="Ime Predmeta"
+										value="#{dodajDrazboMannagedBean.imePredmeta}" />
+									<p:message for="ip" />
+									<br />
+									<p:outputLabel for="pop" value="Poreklo predmeta:" />
+									<p:inputText id="pop" required="true" type="text"
+										placeholder="Drzava"
+										value="#{dodajDrazboMannagedBean.porekloDrzava}" /><br/>
+									<p:outputLabel for="skp" value="Sklicna cena predmeta:" />
+									<p:inputText id="skp" value="#{dodajDrazboMannagedBean.sklicnaCena}" /><p:slider for="skp" />
+										<br></br>
+										<p:outputLabel for="cpp" value="Stroški pošiljanja predmeta:" />
+									<p:inputText id="cpp" value="#{dodajDrazboMannagedBean.cenaPosiljanja}" /><p:slider for="cpp" />
+									
+									<p:outputLabel for="op" value="Opis predmeta:" />
+									<p:inputTextarea  value="#{dodajDrazboMannagedBean.opisPredmeta}" rows="5" id="op" cols="30" counter="display2" maxlength="200" counterTemplate="{0} znakov na voljo." autoResize="true" />
+    								
+    								
+    								
+    								<h:outputText id="display2" /><br/>
+									<p:outputLabel for="datetime" value="Datetime:" />
+									<p:calendar id="datetime"
+										value="#{dodajDrazboMannagedBean.konecDrazbe}"
+										pattern="MM/dd/yyyy HH:mm:ss"  />
+									<p:outputLabel for="sp" value="Stanje predmeta:" />
+				<h:selectOneMenu id="sp" value="#{dodajDrazboMannagedBean.stanje}">
+  			<f:selectItems value="#{dodajDrazboMannagedBean.stanjePredmeta}" var="g" itemValue="#{g}" itemLabel="#{g.description}"/>
+				</h:selectOneMenu>
+
+
+	<h:selectManyCheckbox value="#{dodajDrazboMannagedBean.placilnaSredstva}" layout="pageDirection">
+     <f:selectItems value="#{dodajDrazboMannagedBean.placilnaSredstva}" />
+</h:selectManyCheckbox>
+<h:selectManyCheckbox value="#{dodajDrazboMannagedBean.placilnaSredstva}" converter="placilnaSredstvaConverter">
+    <f:selectItems value="#{dodajDrazboMannagedBean.pp}" />
+</h:selectManyCheckbox>
+			
+
+		
 								</h:panelGrid>
-								<p:commandButton value="Prijava" action="#{prijavaMB.prijaviUporabnika()}"
+								<p:commandButton value="Dodaj drazbo" update="msgs"
+									action="#{dodajDrazboMannagedBean.dodajDrazbo()}"
 									styleClass="ui-priority-primary" />
 
+								<p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+									<p:panelGrid id="display" columns="2"
+										columnClasses="label,value">
+										<h:outputText value="Datetime:" />
+										<h:outputText value="#{dodajDrazboMannagedBean.konecDrazbe}">
+											<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+										</h:outputText>
+									</p:panelGrid>
+								</p:dialog>
 							</h:form>
+						
 						</div>
 						<!--/login form-->
 					</div>
-					
-					
-						
-					
+
+
+
+
 				</div>
 			</div>
 			</section>

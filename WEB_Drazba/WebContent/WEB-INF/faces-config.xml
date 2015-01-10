@@ -85,6 +85,16 @@
    <property-class>com.rirs.drazba.enumi.PlacilnaSredstva</property-class>
    <list-entries/>
   </managed-property>
+  <managed-property>
+   <property-name>prijava</property-name>
+   <property-class>com.rirs.drazba.web.mannagedbeans.PrijavaMannagedBean</property-class>
+   <value>#{prijavaMB}</value>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>pregledDrazbMB</managed-bean-name>
+  <managed-bean-class>com.rirs.drazba.web.mannagedbeans.PregledDrazbMannagedBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <application/>
 </faces-config>

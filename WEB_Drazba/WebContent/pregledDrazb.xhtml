@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<h:title>Drazba HerKos - Pregled Drazb</h:title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/templateNew.xhtml">
+		<ui:define name="content">
+			<section id="form"><!--form-->
+			<div class="container">
+			
+		<p:dataTable var="drazba" value="#{pregledDrazbMB.aktualneDrazbe}" sortMode="multiple">
+        <f:facet name="header">
+            Multiple Column Sort with Metakey
+        </f:facet>
+        <p:column headerText="Ime Predmeta" sortBy="#{drazba.imePredmeta}">
+            <h:outputText value="#{drazba.imePredmeta}" />
+        </p:column>
+ 
+        <p:column headerText="Opis" >
+            <h:outputText value="#{drazba.opisPredmeta}" />
+        </p:column>
+ 
+        <p:column headerText="Čas do izteka" sortBy="#{drazba.koneDrazbe}">
+            <h:outputText value="#{drazba.koneDrazbe}" />
+        </p:column>
+ 
+        <!-- <p:column headerText="Zadnja cena" sortBy="#{drazba.ponudbe.get(drazba.ponudbe.size()-1)}">--> 
+         <!--    <h:outputText value="#{drazba.ponudbe.get(drazba.ponudbe.size()-1)}" />--> 
+      <!--  </p:column>-->
+    </p:dataTable>
+			</div>
+			</section>
+			<f:view>
+		
+		Prijava:
+		</f:view>
+		</ui:define>
+
+
+
+	</ui:composition>
+
+
+</h:body>
+
+</html>
