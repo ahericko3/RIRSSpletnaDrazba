@@ -1,31 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      >
-      <h:head>
-   
-    <h:title>Letalski prevoznik Letalec1 - Prijava</h:title>
-    </h:head>
-    <h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<h:title>Drazba HerKos - Prijava</h:title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/templateNew.xhtml">
+		<ui:define name="content">
+			<section id="form"><!--form-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-1">
+						<div class="login-form">
+							<!--login form-->
+							<h2>Prijava :</h2>
+							<h:form action="#">
+								<p:inputText type="email" placeholder="elektronska posta" />
+								<p:inputText type="password" placeholder="geslo" />
+								<span> <p:inputText type="checkbox" class="checkbox" />
+									Keep me signed in
+								</span>
+								<p:commandButton value="Prijava"
+									styleClass="ui-priority-primary" />
+
+							</h:form>
+						</div>
+						<!--/login form-->
+					</div>
+					<div class="col-sm-1">
+						<h2 class="or">ALI</h2>
+					</div>
+					<div class="col-sm-4">
+						<div class="signup-form">
+							<!--sign up form-->
+							<h2>Registracija novega uporabnika!</h2>
+							<h:form>
+									<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
  
-    	<ui:composition template="/templateNew.xhtml">
- 		<ui:define name="content">
- 
-		<f:view>
+								<h:panelGrid id="grid" columns="2" cellpadding="5">
+									<p:outputLabel for="ime" value="Ime:" />
+									<p:inputText id="ime" required="true" type="text" placeholder="Ime" value="#{registracijaMB.ime}" />
+									<p:message for="ime" /><br/>
+									<p:outputLabel for="pri" value="Priimek:" />
+									<p:inputText id="pri" required="true" type="text" placeholder="Priimek"
+										value="#{registracijaMB.priimek}" /><p:message for="pri" /><br/>
+									<p:outputLabel for="email" value="Elektronska posta:" />
+									<p:inputText id="email" required="true" type="email" placeholder="Elektronska posta"
+										value="#{registracijaMB.email}" /><p:message for="email" /><br/>
+									<p:outputLabel for="feedback" value="Geslo:" />
+									<p:inputText required="true" type="password" id="feedback" feedback="true"
+										placeholder="Geslo" value="#{registracijaMB.geslo}" />
+
+										
+								</h:panelGrid>
+
+								<p:commandButton update="grid" value="Prijava"
+									action="#{registracijaMB.registracija()}"
+									styleClass="ui-priority-primary" />
+
+							</h:form>
+						</div>
+						<!--/sign up form-->
+					</div>
+				</div>
+			</div>
+			</section>
+			<f:view>
 		
 		Prijava:
 		</f:view>
 		</ui:define>
-		
-		
-    		
- </ui:composition>
-		
- 
-    </h:body>
- 
+
+
+
+	</ui:composition>
+
+
+</h:body>
+
 </html>

@@ -2,7 +2,7 @@ package com.rirs.drazba.ejb.dao;
 
 import com.rirs.drazba.entity.Uporabnik;
 
-public interface IUporabnik {
+public interface IUporabnikDAO {
 	public void dodaj(Uporabnik uporabnik);
 	public void uredi(Uporabnik uporabnik);
 	public void odstrani(Uporabnik uporabnik);
