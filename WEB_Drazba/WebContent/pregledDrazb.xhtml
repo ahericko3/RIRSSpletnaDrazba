@@ -33,9 +33,13 @@
             <h:outputText value="#{drazba.koneDrazbe}" />
         </p:column>
  
-        <!-- <p:column headerText="Zadnja cena" sortBy="#{drazba.ponudbe.get(drazba.ponudbe.size()-1)}">--> 
-         <!--    <h:outputText value="#{drazba.ponudbe.get(drazba.ponudbe.size()-1)}" />--> 
-      <!--  </p:column>-->
+        <p:column headerText="Poglej" >
+           <h:link outcome="drazba" value="Podrobnosti">
+				<f:param name="idDrazba" value="#{drazba.id}" />
+												</h:link>
+		
+      </p:column>
+    
     </p:dataTable>
 			</div>
 			</section>
