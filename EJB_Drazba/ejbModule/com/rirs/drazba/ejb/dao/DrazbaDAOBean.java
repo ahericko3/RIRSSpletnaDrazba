@@ -1,6 +1,7 @@
 package com.rirs.drazba.ejb.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -11,54 +12,51 @@ import javax.persistence.TypedQuery;
 import com.rirs.drazba.entity.Drazba;
 import com.rirs.drazba.entity.Ponudba;
 import com.rirs.drazba.entity.Uporabnik;
+import com.rirs.drazba.enumi.Kategorija;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Stateless
 public class DrazbaDAOBean implements IDrazbaDAO {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public Drazba vrniDrazba(int idDrazbe) {
-		List<Drazba> drazbe = em.createQuery("select l from Drazba l where l.id=:iddrazba",Drazba.class)
-				.setParameter("iddrazba", idDrazbe).getResultList();
-				return drazbe.get(0);
+		List<Drazba> drazbe = em
+				.createQuery("select l from Drazba l where l.id=:iddrazba",
+						Drazba.class).setParameter("iddrazba", idDrazbe)
+				.getResultList();
+		return drazbe.get(0);
 	}
 
 	@Override
 	public void dodaj(Drazba drazba) {
-		try
-		{
+		try {
 			em.persist(drazba);
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
 
 	@Override
 	public void odstrani(Drazba drazba) {
-		try
-		{
+		try {
 			em.remove(drazba);
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
 
 	@Override
 	public void uredi(Drazba drazba) {
-		try
-		{
+		try {
 			em.merge(drazba);
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
 	@Override
@@ -69,8 +67,8 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 
 	@Override
 	public List<Drazba> vrniVseDrazbe() {
-		List<Drazba> drazbe = em.createQuery("select l from Drazba ",Drazba.class)
-		.getResultList();
+		List<Drazba> drazbe = em.createQuery("select l from Drazba ",
+				Drazba.class).getResultList();
 		return drazbe;
 	}
 
@@ -88,11 +86,36 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 
 	@Override
 	public List<Drazba> vrniVseDrazbeIzdajatelja(Uporabnik up) {
-		List<Drazba> drazbe = em.createQuery("select l from Drazba l where l.Uporabnik=:up",Drazba.class)
-				.setParameter("up", up)
-				.getResultList();
-				
-				return drazbe;
+		List<Drazba> drazbe = em
+				.createQuery("select l from Drazba l where l.Uporabnik=:up",
+						Drazba.class).setParameter("up", up).getResultList();
+
+		return drazbe;
+	}
+
+	@Override
+	public List<Drazba> vrniVseDrazbeKategorija(Kategorija k) {
+		List<Drazba> drazbe = new ArrayList<Drazba>();
+		if (k == Kategorija.AVDIO_VIDEO) {
+			drazbe.addAll(vrniVseDrazbeKategorija(Kategorija.TV_SPREJEMNIK));
+			drazbe.addAll(vrniVseDrazbeKategorija(Kategorija.AKUSTIKA));
+		}
+		if (k == Kategorija.RACUNALNISTVO) {
+			drazbe.addAll(vrniVseDrazbeKategorija(Kategorija.PRENOSNIKI));
+			drazbe.addAll(vrniVseDrazbeKategorija(Kategorija.TABLICNI_RACUNALNIKI));
+			drazbe.addAll(vrniVseDrazbeKategorija(Kategorija.KOMPONENTE));
+		}
+		if (k == Kategorija.TELEFONIJA) {
+			drazbe.addAll(vrniVseDrazbeKategorija(Kategorija.STACIONARNA_TELEFONIJA));
+			drazbe.addAll(vrniVseDrazbeKategorija(Kategorija.MOBILNA_TELEFONIJA));
+		}
+
+		drazbe.addAll(em
+				.createQuery("select l from Drazba l where l.Kategorija=:k",
+						Drazba.class).setParameter("k", k)
+				.getResultList());
+
+		return drazbe;
 	}
 
 	@Override
@@ -110,28 +133,31 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 	@Override
 	public void oddajPonudbo(Drazba drazba, Ponudba ponudba) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public List<Drazba> vrniAktualneDrazbe() {
-		 List<Drazba> drazbe;  
-		  try{
-		  //TypedQuery<Drazba> q=em.createQuery("Select * from Drazba where koneDrazbe > NOW() ", Drazba.class);  
-		 // drazbe = q.getResultList(); 
-		  
-		   drazbe = em.createQuery("select l from Drazba l where l.koneDrazbe>:datum",Drazba.class)
-					.setParameter("datum", new java.util.Date()).getResultList();
-					
-		  return drazbe;
-		  }catch(Exception e)
-		  {
-		   e.printStackTrace();
-		   return null;
-		  }
-		  
-		  
+		List<Drazba> drazbe;
+		try {
+			// TypedQuery<Drazba>
+			// q=em.createQuery("Select * from Drazba where koneDrazbe > NOW() ",
+			// Drazba.class);
+			// drazbe = q.getResultList();
+
+			drazbe = em
+					.createQuery(
+							"select l from Drazba l where l.koneDrazbe>:datum",
+							Drazba.class)
+					.setParameter("datum", new java.util.Date())
+					.getResultList();
+
+			return drazbe;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
-	
-	
+
 }

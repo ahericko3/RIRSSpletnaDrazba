@@ -5,6 +5,7 @@ import java.util.List;
 import com.rirs.drazba.entity.Drazba;
 import com.rirs.drazba.entity.Ponudba;
 import com.rirs.drazba.entity.Uporabnik;
+import com.rirs.drazba.enumi.Kategorija;
 
 
 public interface IDrazbaDAO {
@@ -21,6 +22,7 @@ public interface IDrazbaDAO {
 	public List<Drazba> vrniVsePotekleDrazbe();
 	public List<Drazba> vrniNajblizjih5Drazb();
 	public List<Drazba> vrniAktualneDrazbe();
+	public List<Drazba> vrniVseDrazbeKategorija(Kategorija k);
 	
 	public void oddajPonudbo(Drazba drazba,Ponudba ponudba);
 }

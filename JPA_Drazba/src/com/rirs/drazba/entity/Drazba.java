@@ -1,13 +1,26 @@
 package com.rirs.drazba.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+import com.rirs.drazba.enumi.Kategorija;
 import com.rirs.drazba.enumi.PlacilnaSredstva;
 import com.rirs.drazba.enumi.StanjePredmeta;
 
@@ -40,11 +53,13 @@ public class Drazba implements Serializable {
     @CollectionTable(name="drazba_placilnaSredstva")
     @Column(name="placilnoSredstvo") // Column name in person_interest
 	private Collection<PlacilnaSredstva> placilnaSredstva;
-	@OneToMany(mappedBy = "drazba", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=Ponudba.class, mappedBy = "drazba", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Ponudba> ponudbe;
 	@OneToMany(targetEntity=Fotografija.class,mappedBy = "drazba", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Fotografija> fotografije;
 	private Uporabnik izdajatelj;
+	
+	private Kategorija kategorija;
 	
 	
 	
@@ -142,7 +157,7 @@ public class Drazba implements Serializable {
 		this.fotografije = fotografije;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity=Uporabnik.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL) 
 	@JoinColumn(name="uporabnik_id")
 	public Uporabnik getIzdajatelj() {
 		return izdajatelj;
@@ -151,6 +166,13 @@ public class Drazba implements Serializable {
 	public void setIzdajatelj(Uporabnik izdajatelj) {
 		this.izdajatelj = izdajatelj;
 	}
-   
+
+	public Kategorija getKategorija() {
+		return kategorija;
+	}
+
+	public void setKategorija(Kategorija kategorija) {
+		this.kategorija = kategorija;
+	} 
 	
 }
