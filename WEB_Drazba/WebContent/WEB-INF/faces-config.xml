@@ -108,17 +108,37 @@
  </managed-bean>
  <managed-bean>
   <managed-bean-name>drazbaMB</managed-bean-name>
-  <managed-bean-class>com.rirs.drazba.web.mannagedbeans.drazbaMannagedBean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
+  <managed-bean-class>com.rirs.drazba.web.mannagedbeans.DrazbaMannagedBean</managed-bean-class>
+  <managed-bean-scope>view</managed-bean-scope>
   <managed-property>
    <property-name>drazba</property-name>
    <property-class>com.rirs.drazba.entity.Drazba</property-class>
    <value/>
   </managed-property>
   <managed-property>
-   <property-name>idDrazbe</property-name>
-   <property-class>int</property-class>
+   <property-name>prijava</property-name>
+   <property-class>com.rirs.drazba.web.mannagedbeans.PrijavaMannagedBean</property-class>
+   <value>#{prijavaMB}</value>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>oddajPonudboMB</managed-bean-name>
+  <managed-bean-class>com.rirs.drazba.web.mannagedbeans.OddajPonudboMannagedBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>ponudba</property-name>
+   <property-class>java.lang.Double</property-class>
    <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>prijava</property-name>
+   <property-class>com.rirs.drazba.web.mannagedbeans.PrijavaMannagedBean</property-class>
+   <value>#{prijavaMB}</value>
+  </managed-property>
+  <managed-property>
+   <property-name>drazba</property-name>
+   <property-class>com.rirs.drazba.web.mannagedbeans.DrazbaMannagedBean</property-class>
+   <value>#{drazbaMB}</value>
   </managed-property>
  </managed-bean>
  <application/>

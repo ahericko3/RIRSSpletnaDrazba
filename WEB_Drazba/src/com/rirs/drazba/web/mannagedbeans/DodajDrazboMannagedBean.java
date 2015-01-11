@@ -4,16 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
-
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-
 import com.rirs.drazba.ejb.dao.IDrazbaDAO;
 import com.rirs.drazba.entity.Drazba;
 import com.rirs.drazba.enumi.Kategorija;
@@ -31,8 +27,8 @@ public class DodajDrazboMannagedBean {
 	private java.lang.String porekloDrzava;
 	private String opisPredmeta;
 	private StanjePredmeta stanje;
-	private Double sklicnaCena;
-	private Double cenaPosiljanja;
+	private String sklicnaCena;
+	private String cenaPosiljanja;
 	private List<PlacilnaSredstva> placilnaSredstva;
 
 	@ManagedProperty(value = "#{prijavaMB}")
@@ -40,6 +36,7 @@ public class DodajDrazboMannagedBean {
 
 	private String kategorija;
 
+	
 	public PrijavaMannagedBean getPrijava() {
 		return prijava;
 	}
@@ -54,19 +51,19 @@ public class DodajDrazboMannagedBean {
 		return StanjePredmeta.values();
 	}
 
-	public Double getCenaPosiljanja() {
+	public String getCenaPosiljanja() {
 		return cenaPosiljanja;
 	}
 
-	public void setCenaPosiljanja(Double cenaPosiljanja) {
+	public void setCenaPosiljanja(String cenaPosiljanja) {
 		this.cenaPosiljanja = cenaPosiljanja;
 	}
 
-	public Double getSklicnaCena() {
+	public String getSklicnaCena() {
 		return sklicnaCena;
 	}
 
-	public void setSklicnaCena(Double sklicnaCena) {
+	public void setSklicnaCena(String sklicnaCena) {
 		this.sklicnaCena = sklicnaCena;
 	}
 
@@ -142,6 +139,9 @@ public class DodajDrazboMannagedBean {
 		d.setPlacilnaSredstva(placilnaSredstva);
 		d.setPorekloDrzava(porekloDrzava);
 		d.setStanje(stanje);
+		d.setCenaPakiranja(Double.valueOf(cenaPosiljanja));
+		d.setSklicnaCena(Double.valueOf(sklicnaCena));
+		
 		d.setOpisPredmeta(opisPredmeta);
 		System.out.println(prijava);
 		d.setIzdajatelj(prijava.getUporabnik());

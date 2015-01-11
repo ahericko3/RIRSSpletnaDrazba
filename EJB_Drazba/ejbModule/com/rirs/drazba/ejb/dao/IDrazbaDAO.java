@@ -25,4 +25,5 @@ public interface IDrazbaDAO {
 	public List<Drazba> vrniVseDrazbeKategorija(Kategorija k);
 	
 	public void oddajPonudbo(Drazba drazba,Ponudba ponudba);
+	
 }

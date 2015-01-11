@@ -43,6 +43,8 @@ public class Drazba implements Serializable {
 	private Double cenaPakiranja;
 	private Date koneDrazbe;
 	private String porekloDrzava;
+	private Ponudba ponudba;
+	
 	//@Enumerated(EnumType.STRING)
 	private StanjePredmeta stanje;
 	//@Enumerated
@@ -63,6 +65,14 @@ public class Drazba implements Serializable {
 	
 	
 	
+	public Ponudba getPonudba() {
+		return ponudba;
+	}
+
+	public void setPonudba(Ponudba ponudba) {
+		this.ponudba = ponudba;
+	}
+
 	public Double getSklicnaCena() {
 		return sklicnaCena;
 	}

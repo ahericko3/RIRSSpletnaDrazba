@@ -120,8 +120,20 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 
 	@Override
 	public List<Drazba> vrniVsePotekleDrazbe() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Drazba> drazbe;
+		try {
+			drazbe = em
+					.createQuery(
+							"select l from Drazba l where l.koneDrazbe<:datum",
+							Drazba.class)
+					.setParameter("datum", new java.util.Date())
+					.getResultList();
+
+			return drazbe;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -140,11 +152,6 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 	public List<Drazba> vrniAktualneDrazbe() {
 		List<Drazba> drazbe;
 		try {
-			// TypedQuery<Drazba>
-			// q=em.createQuery("Select * from Drazba where koneDrazbe > NOW() ",
-			// Drazba.class);
-			// drazbe = q.getResultList();
-
 			drazbe = em
 					.createQuery(
 							"select l from Drazba l where l.koneDrazbe>:datum",

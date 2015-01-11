@@ -11,6 +11,12 @@ import com.rirs.drazba.entity.Drazba;
 
 public class PregledDrazbMannagedBean implements Serializable {
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	IDrazbaDAO drazbaDAO;
 	
@@ -19,6 +25,7 @@ public class PregledDrazbMannagedBean implements Serializable {
 	@PostConstruct
 	public void init(){
 		aktualneDrazbe=drazbaDAO.vrniAktualneDrazbe();
+		
 	}
 
 	public List<Drazba> getAktualneDrazbe() {
