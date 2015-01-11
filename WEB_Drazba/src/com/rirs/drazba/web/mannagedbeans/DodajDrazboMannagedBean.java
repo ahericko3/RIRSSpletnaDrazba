@@ -16,6 +16,7 @@ import org.primefaces.event.SelectEvent;
 
 import com.rirs.drazba.ejb.dao.IDrazbaDAO;
 import com.rirs.drazba.entity.Drazba;
+import com.rirs.drazba.enumi.Kategorija;
 import com.rirs.drazba.enumi.PlacilnaSredstva;
 import com.rirs.drazba.enumi.StanjePredmeta;
 
@@ -23,7 +24,7 @@ public class DodajDrazboMannagedBean {
 
 	@EJB
 	IDrazbaDAO drazbaDAO;
-	
+
 	private java.lang.String imePredmeta;
 	private com.rirs.drazba.entity.Uporabnik izdajatelj;
 	private java.util.Date konecDrazbe;
@@ -33,10 +34,12 @@ public class DodajDrazboMannagedBean {
 	private Double sklicnaCena;
 	private Double cenaPosiljanja;
 	private List<PlacilnaSredstva> placilnaSredstva;
-	
-	@ManagedProperty(value="#{prijavaMB}")
-	private PrijavaMannagedBean prijava; 
-	
+
+	@ManagedProperty(value = "#{prijavaMB}")
+	private PrijavaMannagedBean prijava;
+
+	private String kategorija;
+
 	public PrijavaMannagedBean getPrijava() {
 		return prijava;
 	}
@@ -46,13 +49,11 @@ public class DodajDrazboMannagedBean {
 	}
 
 	private PlacilnaSredstva[] pp;
-	
-	
+
 	public StanjePredmeta[] getStanjePredmeta() {
 		return StanjePredmeta.values();
 	}
-	
-	
+
 	public Double getCenaPosiljanja() {
 		return cenaPosiljanja;
 	}
@@ -133,32 +134,43 @@ public class DodajDrazboMannagedBean {
 		this.stanje = stanje;
 	}
 
-	public void dodajDrazbo(){
-	    Drazba d=new Drazba();
-	    d.setImePredmeta(imePredmeta);
-	    d.setKoneDrazbe(konecDrazbe);
-	    d.setPlacilnaSredstva(placilnaSredstva);
-	    d.setPorekloDrzava(porekloDrzava);
-	    d.setStanje(stanje);
-	    d.setOpisPredmeta(opisPredmeta);
-	    d.setIzdajatelj(prijava.getUporabnik());
-	   
-	    drazbaDAO.dodaj(d);
-		
-	}
-	
-	public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-     
-    public void click() {
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-         
-        requestContext.update("form:display");
-        requestContext.execute("PF('dlg').show()");
-    }
+	public void dodajDrazbo() {
+		System.out.println("Dodajam");
+		Drazba d = new Drazba();
+		d.setImePredmeta(imePredmeta);
+		d.setKoneDrazbe(konecDrazbe);
+		d.setPlacilnaSredstva(placilnaSredstva);
+		d.setPorekloDrzava(porekloDrzava);
+		d.setStanje(stanje);
+		d.setOpisPredmeta(opisPredmeta);
+		System.out.println(prijava);
+		d.setIzdajatelj(prijava.getUporabnik());
+		d.setKategorija(Kategorija.valueOf(kategorija));
+		drazbaDAO.dodaj(d);
 
-    
+	}
+
+	public void onDateSelect(SelectEvent event) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected",
+						format.format(event.getObject())));
+	}
+
+	public String getKategorija() {
+		return kategorija;
+	}
+
+	public void setKategorija(String kategorija) {
+		this.kategorija = kategorija;
+	}
+
+	public void click() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+
+		requestContext.update("form:display");
+		requestContext.execute("PF('dlg').show()");
+	}
+
 }

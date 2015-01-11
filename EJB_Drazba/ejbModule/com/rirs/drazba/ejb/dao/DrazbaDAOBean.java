@@ -87,7 +87,7 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 	@Override
 	public List<Drazba> vrniVseDrazbeIzdajatelja(Uporabnik up) {
 		List<Drazba> drazbe = em
-				.createQuery("select l from Drazba l where l.Uporabnik=:up",
+				.createQuery("select l from Drazba l where l.izdajatelj=:up",
 						Drazba.class).setParameter("up", up).getResultList();
 
 		return drazbe;
@@ -111,7 +111,7 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 		}
 
 		drazbe.addAll(em
-				.createQuery("select l from Drazba l where l.Kategorija=:k",
+				.createQuery("select l from Drazba l where l.kategorija=:k",
 						Drazba.class).setParameter("k", k)
 				.getResultList());
 

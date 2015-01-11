@@ -101,11 +101,11 @@
 		<managed-bean-name>mojeDrazbeMB</managed-bean-name>
 		<managed-bean-class>com.rirs.drazba.web.mannagedbeans.MojeDrazbeMannagedBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>kategorijaMB</managed-bean-name>
-		<managed-bean-class>com.rirs.drazba.web.mannagedbeans.KategorijaMannagedBean</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>prijava</property-name>
+			<property-class>com.rirs.drazba.web.mannagedbeans.PrijavaMannagedBean</property-class>
+			<value>#{prijavaMB}</value>
+		</managed-property>
 	</managed-bean>
 	<application />
 </faces-config>

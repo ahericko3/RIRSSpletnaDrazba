@@ -17,7 +17,7 @@
 			<section id="form"><!--form-->
 			<div class="container">
 
-				<p:dataTable var="drazba" value="#{pregledDrazbMB.mojeDrazbe}"
+				<p:dataTable var="drazba" value="#{mojeDrazbeMB.mojeDrazbe}"
 					sortMode="multiple">
 					<f:facet name="header">
             Multiple Column Sort with Metakey
@@ -43,30 +43,6 @@
 			<f:view>
 		
 		Prijava:
-
-	<h:selectOneMenu id="sp" value="#{kategorijaMB.ks}">
-					<f:selectItem itemValue="AVDIO_VIDEO" itemLabel="1. avdio-video" />
-					<f:selectItem itemValue="TV_SPREJEMNIK"
-						itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;a. tv sprejemnik" />
-					<f:selectItem itemValue="AKUSTIKA"
-						itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;b. akustika" />
-					<f:selectItem itemValue="AVTO_MOTO" itemLabel="2. avto-moto" />
-					<f:selectItem itemValue="RACUNALNISTVO" itemLabel="3. racunalnistvo" />
-					<f:selectItem itemValue="PRENOSNIKI"
-						itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;a. prenosniki" />
-					<f:selectItem itemValue="TABLICNI_RACUNALNIKI"
-						itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;b. tablicni racunalniki" />
-					<f:selectItem itemValue="KOMPONENTE"
-						itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;c. komponente" />
-					<f:selectItem itemValue="OBLACILA" itemLabel="4. oblacila" />
-					<f:selectItem itemValue="DOM" itemLabel="5. dom" />
-					<f:selectItem itemValue="SPORT" itemLabel="6. sport" />
-					<f:selectItem itemValue="TELEFONIJA" itemLabel="7. telefonija" />
-					<f:selectItem itemValue="STACIONARNA_TELEFONIJA"
-						itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;a. stacionarna telefonija" />
-					<f:selectItem itemValue="MOBILNA_TELEFONIJA"
-						itemLabel="&nbsp;&nbsp;&nbsp;&nbsp;b. mobilna telefonija" />
-				</h:selectOneMenu>
 			</f:view>
 		</ui:define>
 

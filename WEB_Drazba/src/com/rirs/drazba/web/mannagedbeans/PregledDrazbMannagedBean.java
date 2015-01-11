@@ -28,6 +28,4 @@ public class PregledDrazbMannagedBean implements Serializable {
 	public void setAktualneDrazbe(List<Drazba> aktualneDrazbe) {
 		this.aktualneDrazbe = aktualneDrazbe;
 	}
-	
-	
 }
