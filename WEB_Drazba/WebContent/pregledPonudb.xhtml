@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<h:title>Drazba HerKos - Pregled Drazb</h:title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/templateNew.xhtml">
+		<ui:define name="content">
+			<section id="form"><!--form-->
+			<div class="container">
+
+				<p:dataTable var="ponudba" value="#{ponudbeMB.ponudbe}"
+					sortMode="multiple">
+					<f:facet name="header">
+            Pregled ponudb za #{ponudbeMB.drazba.imePredmeta}
+        </f:facet>
+					<p:column headerText="Datum ponudbe" sortBy="#{ponudba.datum}">
+						<h:outputText value="#{ponudba.datum}" />
+					</p:column>
+
+					<p:column headerText="Ime in priimek">
+						<h:outputText
+							value="#{ponudba.uporabnik.ime} #{ponudba.uporabnik.priimek}" />
+					</p:column>
+
+					<p:column headerText="Ponudba">
+						<h:outputText value="#{ponudba.ponudba}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+			</section>
+			<f:view>
+		
+		Prijava:
+			</f:view>
+		</ui:define>
+
+
+
+	</ui:composition>
+
+
+
+</h:body>
+
+</html>

@@ -16,36 +16,41 @@
 		<ui:define name="content">
 			<section id="form"><!--form-->
 			<div class="container">
-			
-		<p:dataTable var="drazba" value="#{pregledDrazbMB.aktualneDrazbe}" sortMode="multiple">
-        <f:facet name="header">
+
+				<p:dataTable var="drazba" value="#{pregledDrazbMB.aktualneDrazbe}"
+					sortMode="multiple">
+					<f:facet name="header">
             Multiple Column Sort with Metakey
         </f:facet>
-        <p:column headerText="Ime Predmeta" sortBy="#{drazba.imePredmeta}">
-            <h:outputText value="#{drazba.imePredmeta}" />
-        </p:column>
- 
-        <p:column headerText="Opis" >
-            <h:outputText value="#{drazba.opisPredmeta}" />
-        </p:column>
- 
-        <p:column headerText="Čas do izteka" sortBy="#{drazba.koneDrazbe}">
-            <h:outputText value="#{drazba.koneDrazbe}" />
-        </p:column>
- 
-        <p:column headerText="Poglej" >
-           <h:link outcome="drazba" value="Podrobnosti">
-				<f:param name="idDrazba" value="#{drazba.id}" />
-												</h:link>
-		
-      </p:column>
-    
-    </p:dataTable>
+					<p:column headerText="Ime Predmeta" sortBy="#{drazba.imePredmeta}">
+						<h:outputText value="#{drazba.imePredmeta}" />
+					</p:column>
+
+					<p:column headerText="Opis">
+						<h:outputText value="#{drazba.opisPredmeta}" />
+					</p:column>
+
+					<p:column headerText="Čas do izteka" sortBy="#{drazba.koneDrazbe}">
+						<h:outputText value="#{drazba.koneDrazbe}" />
+					</p:column>
+
+					<p:column headerText="Poglej">
+						<h:link outcome="drazba" value="Podrobnosti">
+							<f:param name="idDrazba" value="#{drazba.id}" />
+						</h:link>
+					</p:column>
+
+					<p:column headerText="Poglej ponudbe">
+						<h:link outcome="pregledPonudb" value="Preglej">
+							<f:param name="idDrazba" value="#{drazba.id}" />
+						</h:link>
+
+					</p:column>
+
+				</p:dataTable>
 			</div>
 			</section>
 			<f:view>
-		
-		Prijava:
 		</f:view>
 		</ui:define>
 

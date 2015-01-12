@@ -25,8 +25,7 @@ public class MojeDrazbeMannagedBean implements Serializable {
 	
 	@PostConstruct
 	public void init(){
-		//mojeDrazbe=drazbaDAO.vrniVseDrazbeIzdajatelja(prijava.getUporabnik());
-		mojeDrazbe=drazbaDAO.vrniVseDrazbeKategorija(Kategorija.AVDIO_VIDEO);
+		mojeDrazbe=drazbaDAO.vrniVseDrazbeIzdajatelja(prijava.getUporabnik());
 	}
 
 

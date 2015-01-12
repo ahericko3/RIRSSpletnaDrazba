@@ -14,16 +14,18 @@ public interface IDrazbaDAO {
 	public void odstrani(Drazba drazba);
 	public void uredi(Drazba drazba);
 	public Date vrniKonecDrazbe(Drazba drazba);//bedna menda?:P
+	public void zakljuciDrazbo(int id);
 	
 	public List<Drazba> vrniVseDrazbe();
 	public List<Drazba> vrniVseDrazbeMinMax(double min, double max); //vrne dražbe v določenem intervalu
-	public List<Drazba> vrniVseDrazbeIzKategorije(String kategorija);
 	public List<Drazba> vrniVseDrazbeIzdajatelja(Uporabnik up);
 	public List<Drazba> vrniVsePotekleDrazbe();
+	public List<Drazba> vrniVseNedokoncanePotekleDrazbe();
 	public List<Drazba> vrniNajblizjih5Drazb();
 	public List<Drazba> vrniAktualneDrazbe();
 	public List<Drazba> vrniVseDrazbeKategorija(Kategorija k);
 	
-	public void oddajPonudbo(Drazba drazba,Ponudba ponudba);
+	public void oddajPonudbo(int idDrazbe,Ponudba ponudba);
+	public List<Ponudba> getPonudbe(int idDrazbe);
 	
 }

@@ -79,12 +79,6 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 	}
 
 	@Override
-	public List<Drazba> vrniVseDrazbeIzKategorije(String kategorija) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Drazba> vrniVseDrazbeIzdajatelja(Uporabnik up) {
 		List<Drazba> drazbe = em
 				.createQuery("select l from Drazba l where l.izdajatelj=:up",
@@ -112,8 +106,7 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 
 		drazbe.addAll(em
 				.createQuery("select l from Drazba l where l.kategorija=:k",
-						Drazba.class).setParameter("k", k)
-				.getResultList());
+						Drazba.class).setParameter("k", k).getResultList());
 
 		return drazbe;
 	}
@@ -143,8 +136,11 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 	}
 
 	@Override
-	public void oddajPonudbo(Drazba drazba, Ponudba ponudba) {
-		// TODO Auto-generated method stub
+	public void oddajPonudbo(int idDrazbe, Ponudba ponudba) {
+	     Drazba drazba = em.find(Drazba.class, idDrazbe);
+	     drazba.setPonudba(ponudba);
+	     ponudba.setDrazba(drazba);
+	     em.persist(ponudba);
 
 	}
 
@@ -165,6 +161,48 @@ public class DrazbaDAOBean implements IDrazbaDAO {
 			return null;
 		}
 
+	}
+
+	@Override
+	public List<Ponudba> getPonudbe(int idDrazbe) {
+		List<Ponudba> ponudbe;
+		try {
+			ponudbe = em
+					.createQuery(
+							"select l from Ponudba l where l.drazba.id=:idDrazbe",
+							Ponudba.class)
+					.setParameter("idDrazbe", idDrazbe)
+					.getResultList();
+
+			return ponudbe;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<Drazba> vrniVseNedokoncanePotekleDrazbe() {
+		List<Drazba> drazbe;
+		try {
+			drazbe = em
+					.createQuery(
+							"select l from Drazba l where l.koneDrazbe<:datum and konec=false",
+							Drazba.class)
+					.setParameter("datum", new java.util.Date())
+					.getResultList();
+
+			return drazbe;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void zakljuciDrazbo(int id){
+	     Drazba drazba = em.find(Drazba.class, id);
+	     drazba.setKonec(true);
 	}
 
 }

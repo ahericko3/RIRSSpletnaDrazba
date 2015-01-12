@@ -19,7 +19,9 @@ public class Ponudba implements Serializable {
 	private int id;
 	private double ponudba;
 	private Date datum;
+	@ManyToOne
 	private Drazba drazba;
+	@ManyToOne
 	private Uporabnik uporabnik;
 	
 	public Ponudba() {

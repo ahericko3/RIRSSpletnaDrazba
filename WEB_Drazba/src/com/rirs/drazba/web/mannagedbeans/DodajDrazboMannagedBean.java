@@ -141,6 +141,7 @@ public class DodajDrazboMannagedBean {
 		d.setStanje(stanje);
 		d.setCenaPakiranja(Double.valueOf(cenaPosiljanja));
 		d.setSklicnaCena(Double.valueOf(sklicnaCena));
+		d.setKonec(false);
 		
 		d.setOpisPredmeta(opisPredmeta);
 		System.out.println(prijava);

@@ -1,6 +1,10 @@
 package com.rirs.drazba.web.mannagedbeans;
 
+import java.util.ArrayList;
+
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 import com.rirs.drazba.ejb.dao.IDrazbaDAO;
 import com.rirs.drazba.ejb.dao.IPonudbaDAO;
@@ -8,14 +12,14 @@ import com.rirs.drazba.entity.Drazba;
 import com.rirs.drazba.entity.Ponudba;
 
 public class OddajPonudboMannagedBean {
-	@EJB 
+	@EJB
 	IDrazbaDAO drazbaDAO;
 	@EJB
 	IPonudbaDAO ponudbeDAO;
-	
+
 	private Double ponudba;
-	private PrijavaMannagedBean prijava;
-	private DrazbaMannagedBean drazba;
+
+	private DrazbaRequestMannagedBean drazbaMB;
 
 	public java.lang.Double getPonudba() {
 		return ponudba;
@@ -25,45 +29,37 @@ public class OddajPonudboMannagedBean {
 		this.ponudba = ponudba;
 	}
 
-	public com.rirs.drazba.web.mannagedbeans.PrijavaMannagedBean getPrijava() {
-		return prijava;
-	}
-
-	public void setPrijava(
-			com.rirs.drazba.web.mannagedbeans.PrijavaMannagedBean prijava) {
-		this.prijava = prijava;
-	}
-
-	public com.rirs.drazba.web.mannagedbeans.DrazbaMannagedBean getDrazba() {
-		return drazba;
-	}
-
-	public void setDrazba(
-			com.rirs.drazba.web.mannagedbeans.DrazbaMannagedBean drazba) {
-		this.drazba = drazba;
-	}
-	
-	public void oddajPonudbo(){
-		System.out.println("oddajPonudbo");
-		Ponudba p=new Ponudba();
+	public void oddajPonudbo() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String id = (String) facesContext.getExternalContext()
+				.getRequestParameterMap().get("idDrazba");
+		Ponudba p = new Ponudba();
 		p.setDatum(new java.util.Date());
-		p.setDrazba(drazba.getDrazba());
+		p.setDrazba(drazbaMB.getDrazba(Integer.parseInt(id)));
 		p.setPonudba(ponudba);
-		p.setUporabnik(prijava.getUporabnik());
-		
-		Drazba d=new Drazba();
-		try{
-			if(drazba.getDrazba().getPonudbe()!=null){
-				d=drazba.getDrazba();
-				d.getPonudbe().add(p);
-				d.setPonudba(p);
-			}
-		}catch(Exception e){
-			
-		}
-		//drazbaDAO.uredi(d);
-		ponudbeDAO.dodaj(p);
-		
+		p.setUporabnik(drazbaMB.getPrijava().getUporabnik());
+		drazbaDAO.oddajPonudbo(Integer.parseInt(id), p);
+
+		/**
+		 * Drazba d = new Drazba(); try { if (drazbaMB.getDrazba().getPonudbe()
+		 * != null) { d = drazbaMB.getDrazba(); d.getPonudbe().add(p);
+		 * d.setPonudba(p); } else { d = drazbaMB.getDrazba();
+		 * ArrayList<Ponudba> ponudbe = new ArrayList<Ponudba>();
+		 * ponudbe.add(p); d.setPonudbe(ponudbe); }
+		 * 
+		 * } catch (Exception e) {
+		 * 
+		 * }
+		 */
+		// drazbaDAO.uredi(d);
+
 	}
 
+	public DrazbaRequestMannagedBean getDrazbaMB() {
+		return drazbaMB;
+	}
+
+	public void setDrazbaMB(DrazbaRequestMannagedBean drazbaMB) {
+		this.drazbaMB = drazbaMB;
+	}
 }

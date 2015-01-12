@@ -19,6 +19,7 @@ public class Fotografija implements Serializable {
 	private int id;
 	private Blob slika;
 	private String opis;
+	@ManyToOne
 	private Drazba drazba;
 	
 	public Fotografija() {

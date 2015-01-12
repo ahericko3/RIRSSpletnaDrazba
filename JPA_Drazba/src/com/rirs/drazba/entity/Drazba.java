@@ -43,6 +43,8 @@ public class Drazba implements Serializable {
 	private Double cenaPakiranja;
 	private Date koneDrazbe;
 	private String porekloDrzava;
+	private boolean konec;
+	@ManyToOne
 	private Ponudba ponudba;
 	
 	//@Enumerated(EnumType.STRING)
@@ -59,6 +61,7 @@ public class Drazba implements Serializable {
 	private List<Ponudba> ponudbe;
 	@OneToMany(targetEntity=Fotografija.class,mappedBy = "drazba", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Fotografija> fotografije;
+	@ManyToOne
 	private Uporabnik izdajatelj;
 	
 	private Kategorija kategorija;
@@ -183,6 +186,14 @@ public class Drazba implements Serializable {
 
 	public void setKategorija(Kategorija kategorija) {
 		this.kategorija = kategorija;
+	}
+
+	public boolean isKonec() {
+		return konec;
+	}
+
+	public void setKonec(boolean konec) {
+		this.konec = konec;
 	} 
 	
 }
